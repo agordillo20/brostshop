@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/plantilla_admin :: head">
+    <title></title>
+</head>
+
+<body>
+
+<header th:replace="layout/plantilla_admin :: header"></header>
+
+<div class="container  py-4">
+
+    <div th:object="${producto}" th:remove="tag">
+        <ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+            <li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+        </ul>
+    </div>
+
+    <div class="card bg-dark text-white">
+        <div class="card-header">
+            <h1>Nuevo Producto</h1>
+        </div>
+
+        <div class="card-body">
+            <form th:action="@{/admin/productos/add}" th:object="${producto}"
+                  method="post" enctype="multipart/form-data">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Código <span class="text-sm-left">(opcional)</span></label>
+                    <div class="col-sm-6">
+                        <input type="text" th:field="*{codPro}" class="form-control"
+                               th:errorclass="'form-control alert-danger'"/>
+                        <small class="form-text text-danger"
+                               th:if="${#fields.hasErrors('codPro')}" th:errors="*{codPro}"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Nombre</label>
+                    <div class="col-sm-6">
+                        <input type="text" th:field="*{nombre}" class="form-control"
+                               th:errorclass="'form-control alert-danger'"/>
+                        <small class="form-text text-danger"
+                               th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Descripcion</label>
+                    <div class="col-sm-6">
+                        <input type="number" required min="0" step=".01" th:field="*{descripcion}" class="form-control"
+                               th:errorclass="'form-control alert-danger'"/>
+                        <small class="form-text text-danger"
+                               th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Precio</label>
+                    <div class="col-sm-6">
+                        <input type="number" required min="0" th:field="*{precio}" class="form-control"
+                               th:errorclass="'form-control alert-danger'"/>
+                        <small class="form-text text-danger"
+                               th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Cantidad</label>
+                    <div class="col-sm-6">
+                        <input type="number" required min="0" th:field="*{cantidad}" class="form-control"
+                               th:errorclass="'form-control alert-danger'"/>
+                        <small class="form-text text-danger"
+                               th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Distribuidor</label>
+                    <div class="col-sm-6">
+                        <select th:field="${producto.distribuidor}" required>
+                            <option value=""></option>
+                            <option th:each="distribuidor : ${distribuidores}"
+                                    th:value="${{distribuidor}}"
+                                    th:utext="${distribuidor.getNombre()}"/>
+                        </select>
+                        <small class="form-text text-danger"
+                               th:if="${#fields.hasErrors('proveedor')}"
+                               th:errors="*{distribuidor}">
+                        </small>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Foto</label>
+                    <div class="col-sm-6">
+                        <input type="file" name="file" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" th:field="*{activo}"/>
+                    <label class="form-check-label">Activo</label>
+                </div>
+                <button type="submit" class="btn btn-primary col-sm-12">Guardar</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+<footer th:replace="layout/plantilla_admin :: footer"></footer>
+</body>
+</html>
