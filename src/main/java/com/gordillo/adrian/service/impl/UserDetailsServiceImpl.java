@@ -30,7 +30,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Usuario usuario = usuariosRepository.findByUsername(username);
-
+        logger.info(usuario.toString());
         if (usuario == null) {
             logger.error("Error en el login: no existe el usuario '" + username + "'");
             throw new UsernameNotFoundException("Username '" + username + "' no encontrado");

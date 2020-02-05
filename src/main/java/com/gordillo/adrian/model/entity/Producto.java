@@ -14,7 +14,7 @@ public class Producto implements Serializable {
     private String descripcion;
     private double precio;
     private int cantidad;
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "idDistribuidor")
     private Distribuidor distribuidor;
     private String foto;

@@ -1,0 +1,14 @@
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+body {
+    background-color: rgba(27, 27, 113, 0.28);
+}

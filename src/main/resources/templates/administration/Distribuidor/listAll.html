@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="plantilla :: head"/>
+<header th:replace="plantilla :: header"></header>
+<body style="background-color:rgba(27,27,113,0.28)">
+<table>
+    <thead>
+    <tr>
+        <td>Codigo</td>
+        <td>Nombre</td>
+        <td>Descripcion</td>
+        <td>Precio</td>
+        <td>Stock</td>
+        <td>Distribuidor</td>
+        <td>Activo</td>
+        <td>Opciones</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="producto: ${productos}">
+        <td th:utext="${producto.codProducto}"></td>
+        <td th:utext="${producto.nombre}"></td>
+        <td th:utext="${producto.descripcion}"></td>
+        <td th:utext="${producto.precio}"></td>
+        <td th:utext="${producto.cantidad}"></td>
+        <td th:utext="${producto.distribuidor.nombre.concat('-').concat(producto.distribuidor.localidad)}"></td>
+        <td th:utext="${producto.activo}"></td>
+        <td>
+            <a class="btn btn-secondary" th:text="'borrar'" th:href="@{/admin/productos/remove/} + ${producto.id}"
+               onclick="return confirm('¿Está seguro que quiere borrar el producto');"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="plantilla :: footer"></footer>
+</body>
+</html>
