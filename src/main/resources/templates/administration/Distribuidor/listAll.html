@@ -12,6 +12,7 @@
         <td>Precio</td>
         <td>Stock</td>
         <td>Distribuidor</td>
+        <td>Foto</td>
         <td>Activo</td>
         <td>Opciones</td>
     </tr>
@@ -23,6 +24,12 @@
         <td th:utext="${producto.descripcion}"></td>
         <td th:utext="${producto.precio}"></td>
         <td th:utext="${producto.cantidad}"></td>
+        <td>
+            <img th:if="${not #strings.isEmpty(producto.foto) and #strings.length(producto.foto) > 0}"
+                 class="card-img-top"
+                 style="max-height:50px" th:src="@{'/log/' + ${producto.foto}}"
+                 th:alt="${producto.foto}"/>
+        </td>
         <td th:utext="${producto.distribuidor.nombre.concat('-').concat(producto.distribuidor.localidad)}"></td>
         <td th:utext="${producto.activo}"></td>
         <td>
