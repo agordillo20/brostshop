@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla :: head">
+</head>
+<body style="background-color:rgba(27,27,113,0.28)">
+<header th:replace="plantilla :: header"></header>
+
+<div th:object="${marca}" th:remove="tag">
+    <ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+        <li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+    </ul>
+</div>
+<br><br>
+<form th:action="@{/admin/marca/add}" th:object="${marca}"
+      method="post">
+    <table class="text-sm-left table-hover" width="600px" style="margin: auto">
+        <thead class="bg-dark text-white">
+        <tr>
+            <td colspan="2" class="text-sm-center">Nueva Marca</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="bg-dark text-white">Nombre</td>
+            <td><input type="text" th:field="*{razonSocial}" class="form-control"
+                       th:errorclass="'form-control alert-danger'"/></td>
+        </tr>
+        <tr>
+            <td class="bg-dark text-white">Activo</td>
+            <td class="text-sm-right">
+                <input type="checkbox" th:field="*{activo}"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-sm-center">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <small class="form-text text-danger"
+           th:if="${#fields.hasErrors('razonSocial')}" th:errors="*{razonSocial}"></small>
+</form>
+<footer th:replace="plantilla :: footer"/>
+</body>
+</html>

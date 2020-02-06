@@ -12,28 +12,36 @@
     </ul>
 </div>
 <br><br>
-<form th:action="@{/admin/productos/add}" th:object="${produto}"
-      method="post" enctype="multipart/form-data">
-    <table class="text-sm-left table-hover" width="600px" style="margin: auto">
+<form enctype="multipart/form-data" method="post" th:action="@{/admin/productos/add}"
+      th:object="${produto}">
+    <table class="text-sm-left table-hover" width="50%" style="margin: auto">
         <thead class="bg-dark text-white">
         <tr>
-            <td colspan="2" class="text-sm-center">Nuevo Producto</td>
+            <td colspan="4" class="text-lg-center font-weight-bold">Nuevo Producto</td>
+        </tr>
+        <tr>
+            <td colspan="4"></td>
         </tr>
         </thead>
         <tbody>
         <tr>
             <td class="bg-dark text-white">Código</td>
-            <td><input type="text" th:field="*{codProducto}" class="form-control"
-                       th:errorclass="'form-control alert-danger'"/></td>
+            <td>
+                <input type="text" th:field="*{codProducto}" class="form-control"
+                       th:errorclass="'form-control alert-danger'"/>
+            </td>
+            <td class="bg-dark text-white">Memoria Ram</td>
+            <td>
+                <input type="number" th:field="*{memoriaRam}" class="form-control"
+                       th:errorclass="'form-control alert-danger'"/>
+            </td>
         </tr>
         <tr>
-            <td class="bg-dark text-white">Nombre</td>
-            <td><input type="text" th:field="*{nombre}" class="form-control"
+            <td class="bg-dark text-white">Modelo</td>
+            <td><input type="text" th:field="*{modelo}" class="form-control"
                        th:errorclass="'form-control alert-danger'"/></td>
-        </tr>
-        <tr>
-            <td class="bg-dark text-white">Descripcion</td>
-            <td><input type="text" th:field="*{descripcion}" class="form-control"
+            <td class="bg-dark text-white">Procesador</td>
+            <td><input type="text" th:field="*{procesador}" class="form-control"
                        th:errorclass="'form-control alert-danger'"/></td>
         </tr>
         <tr>
@@ -41,38 +49,57 @@
             <td><input type="number" required min="0" th:field="*{precio}" class="form-control"
                        th:errorclass="'form-control alert-danger'"/>
             </td>
+            <td class="bg-dark text-white">Sistema operativo</td>
+            <td><input type="text" th:field="*{sistemaOperativo}" class="form-control"
+                       th:errorclass="'form-control alert-danger'"/>
+            </td>
         </tr>
         <tr>
-            <td class="bg-dark text-white">Cantidad</td>
-            <td><input type="number" required min="0" th:field="*{cantidad}" class="form-control"
+            <td class="bg-dark text-white">Stock</td>
+            <td><input type="number" required min="0" th:field="*{stock}" class="form-control"
+                       th:errorclass="'form-control alert-danger'"/>
+            </td>
+            <td class="bg-dark text-white">Almacenamiento interno</td>
+            <td><input type="number" required min="0" th:field="*{almacenamientoInterno}" class="form-control"
                        th:errorclass="'form-control alert-danger'"/>
             </td>
         </tr>
         <tr>
             <td class="bg-dark text-white">Distribuidor</td>
-            <td class="text-sm-right">
+            <td class="text-sm-left" colspan="3">
                 <select th:field="${produto.distribuidor}" required>
                     <option value=""/>
-                    <option th:each="distribuidor : ${proveedores}" th:value="${{distribuidor}}"
+                    <option th:each="distribuidor : ${distribuidores}" th:value="${{distribuidor}}"
                             th:utext="${distribuidor.getNombre()}"/>
                 </select>
             </td>
         </tr>
         <tr>
+            <td class="bg-dark text-white">Marca</td>
+            <td class="text-sm-left" colspan="3">
+                <select th:field="${produto.marca}" required>
+                    <option value=""/>
+                    <option th:each="marca : ${marcas}" th:value="${{marca}}"
+                            th:utext="${marca.getRazonSocial()}"/>
+                </select>
+            </td>
+        </tr>
+        <tr>
             <td class="bg-dark text-white">Foto</td>
-            <td>
+            <td colspan="3" class="text-left">
                 <input type="file" name="file"/>
             </td>
         </tr>
         <tr>
             <td class="bg-dark text-white">Activo</td>
-            <td class="text-sm-right">
+            <td class="text-sm-left" colspan="3">
                 <input type="checkbox" th:field="*{activo}"/>
             </td>
         </tr>
         <tr>
-            <td colspan="2" class="text-sm-center">
-                <button type="submit" class="btn btn-primary">Guardar</button>
+            <td></td>
+            <td colspan="3" class="text-sm-center">
+                <button type="submit" class="btn btn-primary btn-block">Guardar</button>
             </td>
         </tr>
         </tbody>
@@ -83,17 +110,27 @@
            th:if="${#fields.hasErrors('codProducto')}" th:errors="*{codProducto}"></small>
 
     <small class="form-text text-danger"
-           th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+           th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}"></small>
 
     <small class="form-text text-danger"
-           th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></small>
+           th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}"></small>
 
     <small class="form-text text-danger"
            th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></small>
 
+    <small class="form-text text-danger"
+           th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></small>
 
     <small class="form-text text-danger"
-           th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}"></small>
+           th:if="${#fields.hasErrors('memoriaRam')}" th:errors="*{memoriaRam}"></small>
+
+    <small class="form-text text-danger"
+           th:if="${#fields.hasErrors('procesador')}" th:errors="*{procesador}"></small>
+    <small class="form-text text-danger"
+           th:if="${#fields.hasErrors('sistemaOperativo')}" th:errors="*{sistemaOperativo}"></small>
+    <small class="form-text text-danger"
+           th:if="${#fields.hasErrors('almacenamientoInterno')}" th:errors="*{almacenamientoInterno}"></small>
+
 
     <small class="form-text text-danger"
            th:if="${#fields.hasErrors('distribuidor')}"

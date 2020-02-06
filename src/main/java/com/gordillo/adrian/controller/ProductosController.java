@@ -2,6 +2,7 @@ package com.gordillo.adrian.controller;
 
 import com.gordillo.adrian.model.entity.Producto;
 import com.gordillo.adrian.service.DistribuidoresService;
+import com.gordillo.adrian.service.MarcasService;
 import com.gordillo.adrian.service.ProductosService;
 import com.gordillo.adrian.service.UploadFileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class ProductosController {
     private DistribuidoresService distribuidoresService;
     @Autowired
     private ProductosService productosService;
+    @Autowired
+    private MarcasService marcasService;
 
     @GetMapping(path = "/")
     @ResponseBody
@@ -34,7 +37,8 @@ public class ProductosController {
     @GetMapping(path = "/add")
     public String add(Model model) {
         model.addAttribute("produto", new Producto());
-        model.addAttribute("proveedores", distribuidoresService.findAll());
+        model.addAttribute("distribuidores", distribuidoresService.findAll());
+        model.addAttribute("marcas", marcasService.findAll());
         return "administration/Producto/newProduct";
     }
 

@@ -21,6 +21,7 @@ public class HomeController {
             return "redirect:/";
         }
         if (error != null) {
+            flash.addAttribute("error", "Identificacion incorrecta");
             model.addAttribute("error", "Identificación incorrecta");
         }
         return "login";

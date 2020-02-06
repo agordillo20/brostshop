@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="plantilla :: head"/>
+<header th:replace="plantilla :: header"></header>
+<body style="background-color:rgba(27,27,113,0.28)">
+<table class="table table-hover text-center">
+    <thead class="bg-info font-weight-bold">
+    <tr>
+        <td>Nombre</td>
+        <td>Apellidos</td>
+        <td>Localidad</td>
+        <td>Antiguedad</td>
+        <td>Activo</td>
+        <td>Opciones</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="distribuidor: ${distribuidores}">
+        <td th:utext="${distribuidor.nombre}"></td>
+        <td th:utext="${distribuidor.apellidos}"></td>
+        <td th:utext="${distribuidor.localidad}"></td>
+        <td th:utext="${distribuidor.antiguedad}"></td>
+        <td th:utext="${distribuidor.activo}"></td>
+        <td>
+            <a class="btn btn-secondary" th:text="'borrar'"
+               th:href="@{/admin/distribuidor/remove/} + ${distribuidor.id}"
+               onclick="return confirm('¿Está seguro que quiere borrar el distribuidor y sus productos?');"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="plantilla :: footer"></footer>
+</body>
+</html>

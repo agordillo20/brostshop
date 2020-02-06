@@ -7,11 +7,15 @@
     <thead class="bg-info font-weight-bold">
     <tr>
         <td>Codigo</td>
-        <td>Nombre</td>
-        <td>Descripcion</td>
+        <td>Modelo</td>
         <td>Precio</td>
         <td>Stock</td>
+        <td>Memoria ram</td>
+        <td>Procesador</td>
+        <td>Sistema operativo</td>
+        <td>Almacenamiento interno</td>
         <td>Distribuidor</td>
+        <td>Marca</td>
         <td>Foto</td>
         <td>Activo</td>
         <td>Opciones</td>
@@ -20,11 +24,15 @@
     <tbody>
     <tr th:each="producto: ${productos}">
         <td th:utext="${producto.codProducto}"></td>
-        <td th:utext="${producto.nombre}"></td>
-        <td th:utext="${producto.descripcion}"></td>
+        <td th:utext="${producto.modelo}"></td>
         <td th:utext="${producto.precio}"></td>
-        <td th:utext="${producto.cantidad}"></td>
+        <td th:utext="${producto.stock}"></td>
+        <td th:utext="${producto.memoriaRam}"></td>
+        <td th:utext="${producto.procesador}"></td>
+        <td th:utext="${producto.sistemaOperativo}"></td>
+        <td th:utext="${producto.almacenamientoInterno}"></td>
         <td th:utext="${producto.distribuidor.nombre.concat('-').concat(producto.distribuidor.localidad)}"></td>
+        <td th:utext="${producto.marca.razonSocial}"></td>
         <td>
             <img th:if="${not #strings.isEmpty(producto.foto) and #strings.length(producto.foto) > 0}"
                  class="card-img-top"

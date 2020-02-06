@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head th:fragment="head">
     <meta charset="UTF-8"/>
@@ -12,7 +13,13 @@
 <body style="background-color:rgba(27,27,113,0.28)">
 <header th:fragment="header">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <img src="" th:src="@{/images/logo.png}" height="50" alt="Logo"/>
         <a class="navbar-brand" href="/">Proyecto Adrian</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -44,13 +51,31 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
+                        Marcas
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#" th:href="@{/admin/marca/add}">Añadir marca</a>
+                        <a class="dropdown-item" href="#">Listar marcas</a>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav navbar-right">
+                <li sec:authorize="!isAuthenticated()">
+                    <a class="btn btn-outline-primary" th:href="@{/login}">Iniciar Sesion
+                        <span class="sr-only">Entrar</span>
+                    </a>
+                </li>
+                <li class="small" sec:authorize="isAuthenticated()">
+                    <form id="formLogout" th:action="@{/logout}" method="post">
+                        <span sec:authentication="name"></span>
+                        [
+                        <span sec:authentication="principal.authorities"></span>
+                        ]
+                        <button class="btn btn-outline-primary" type="submit">
+                            Cerrar Sesion
+                        </button>
+                    </form>
                 </li>
             </ul>
         </div>

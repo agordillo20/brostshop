@@ -17,10 +17,7 @@ public interface ProductosService {
 
     List<Producto> findByCodProducto(String codPro);
 
-    List<Producto> findByDescripcion(String Descripcion);
-
-
-    List<Producto> findProductoByCodArticuloByDescripcion(String codProducto, String descripcion);
+    List<Producto> findProductoByCodArticulo(String codProducto);
 
 
 }

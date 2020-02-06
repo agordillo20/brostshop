@@ -46,12 +46,7 @@ public class ProductosServiceImpl implements ProductosService {
     }
 
     @Override
-    public List<Producto> findByDescripcion(String Descripcion) {
-        return productoRepository.findByDescripcion(Descripcion);
-    }
-
-    @Override
-    public List<Producto> findProductoByCodArticuloByDescripcion(String codProducto, String descripcion) {
-        return productoRepository.findArticuloByFiltroCodArticuloByFiltroDescripcion(codProducto, descripcion);
+    public List<Producto> findProductoByCodArticulo(String codProducto) {
+        return productoRepository.findArticuloByFiltroCodArticulo(codProducto);
     }
 }

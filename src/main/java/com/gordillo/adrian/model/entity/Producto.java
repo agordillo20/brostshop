@@ -10,34 +10,23 @@ public class Producto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String codProducto;
-    private String nombre;
-
+    private String modelo;
+    private double precio;
+    private int stock;
+    private int memoriaRam;
+    private String procesador;
+    private String sistemaOperativo;
+    private int almacenamientoInterno;
+    private String foto;
+    private boolean activo;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "idDistribuidor")
+    private Distribuidor distribuidor;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idMarca")
     private Marca marca;
 
-    private double precio;
-    private int cantidad;
-
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "idDistribuidor")
-    private Distribuidor distribuidor;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "especificaciones", referencedColumnName = "id")
-    private Especificaciones especificaciones;
-
-    private String foto;
-    private boolean activo;
-
     public Producto() {
-    }
-
-    public Producto(String codProducto, String nombre, double precio, int cantidad) {
-        this.codProducto = codProducto;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.cantidad = cantidad;
     }
 
     public Integer getId() {
@@ -56,20 +45,16 @@ public class Producto implements Serializable {
         this.codProducto = codProducto;
     }
 
-    public String getNombre() {
-        return nombre;
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public String getModelo() {
+        return modelo;
     }
 
-    public Marca getMarca() {
-        return marca;
-    }
-
-    public void setMarca(Marca marca) {
-        this.marca = marca;
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
 
     public double getPrecio() {
@@ -80,20 +65,40 @@ public class Producto implements Serializable {
         this.precio = precio;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public int getStock() {
+        return stock;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public int getMemoriaRam() {
+        return memoriaRam;
     }
 
-    public Distribuidor getDistribuidor() {
-        return distribuidor;
+    public void setMemoriaRam(int memoriaRam) {
+        this.memoriaRam = memoriaRam;
     }
 
-    public void setDistribuidor(Distribuidor distribuidor) {
-        this.distribuidor = distribuidor;
+    public String getProcesador() {
+        return procesador;
+    }
+
+    public void setProcesador(String procesador) {
+        this.procesador = procesador;
+    }
+
+    public String getSistemaOperativo() {
+        return sistemaOperativo;
+    }
+
+    public void setSistemaOperativo(String sistemaOperativo) {
+        this.sistemaOperativo = sistemaOperativo;
+    }
+
+    public int getAlmacenamientoInterno() {
+        return almacenamientoInterno;
+    }
+
+    public void setAlmacenamientoInterno(int almacenamientoInterno) {
+        this.almacenamientoInterno = almacenamientoInterno;
     }
 
     public String getFoto() {
@@ -110,5 +115,21 @@ public class Producto implements Serializable {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public Distribuidor getDistribuidor() {
+        return distribuidor;
+    }
+
+    public void setDistribuidor(Distribuidor distribuidor) {
+        this.distribuidor = distribuidor;
+    }
+
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca;
     }
 }
