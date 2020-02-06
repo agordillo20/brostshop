@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.io.IOException;
+
 @SpringBootApplication
 public class AdrianApplication implements CommandLineRunner {
     @Autowired
@@ -20,12 +22,12 @@ public class AdrianApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        /*try {
+        try {
             // Solo para desarrollo se puede establecer que vaya borrando
             //    uploadFileService.deleteAll();
             uploadFileService.init();
         } catch (IOException ex) {
-        }*/
+        }
         String passBCript = passwordEncoder.encode("adrian");
         System.out.println("Contraseña encriptada inicial de admin: " + passBCript);
     }

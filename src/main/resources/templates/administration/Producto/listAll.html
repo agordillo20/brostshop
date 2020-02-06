@@ -3,8 +3,8 @@
 <head th:replace="plantilla :: head"/>
 <header th:replace="plantilla :: header"></header>
 <body style="background-color:rgba(27,27,113,0.28)">
-<table>
-    <thead>
+<table class="table table-hover text-center">
+    <thead class="bg-info font-weight-bold">
     <tr>
         <td>Codigo</td>
         <td>Nombre</td>
@@ -12,6 +12,7 @@
         <td>Precio</td>
         <td>Stock</td>
         <td>Distribuidor</td>
+        <td>Foto</td>
         <td>Activo</td>
         <td>Opciones</td>
     </tr>
@@ -24,6 +25,12 @@
         <td th:utext="${producto.precio}"></td>
         <td th:utext="${producto.cantidad}"></td>
         <td th:utext="${producto.distribuidor.nombre.concat('-').concat(producto.distribuidor.localidad)}"></td>
+        <td>
+            <img th:if="${not #strings.isEmpty(producto.foto) and #strings.length(producto.foto) > 0}"
+                 class="card-img-top"
+                 style="max-height:50px;max-width: 50px" th:src="@{'/upload/' + ${producto.foto}}"
+                 th:alt="foto"/>
+        </td>
         <td th:utext="${producto.activo}"></td>
         <td>
             <a class="btn btn-secondary" th:text="'borrar'" th:href="@{/admin/productos/remove/} + ${producto.id}"

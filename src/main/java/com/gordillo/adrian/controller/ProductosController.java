@@ -57,7 +57,6 @@ public class ProductosController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                flash.addFlashAttribute("info", "Fichero cargado correctamente '" + uniqueFilename + "'");
                 producto.setFoto(uniqueFilename);
             }
             try {
