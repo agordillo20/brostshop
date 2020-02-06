@@ -11,22 +11,31 @@ public class Producto implements Serializable {
     private Integer id;
     private String codProducto;
     private String nombre;
-    private String descripcion;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idMarca")
+    private Marca marca;
+
     private double precio;
     private int cantidad;
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "idDistribuidor")
     private Distribuidor distribuidor;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "especificaciones", referencedColumnName = "id")
+    private Especificaciones especificaciones;
+
     private String foto;
     private boolean activo;
 
     public Producto() {
     }
 
-    public Producto(String codProducto, String nombre, String descripcion, double precio, int cantidad) {
+    public Producto(String codProducto, String nombre, double precio, int cantidad) {
         this.codProducto = codProducto;
         this.nombre = nombre;
-        this.descripcion = descripcion;
         this.precio = precio;
         this.cantidad = cantidad;
     }
@@ -55,12 +64,12 @@ public class Producto implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public Marca getMarca() {
+        return marca;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setMarca(Marca marca) {
+        this.marca = marca;
     }
 
     public double getPrecio() {
