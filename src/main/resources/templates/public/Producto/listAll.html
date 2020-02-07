@@ -3,6 +3,44 @@
 <head th:replace="plantilla :: head"/>
 <header th:replace="plantilla :: header"></header>
 <body style="background-color:rgba(27,27,113,0.28)">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgba(15,15,68,0.46)">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Marcas
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div th:each="marca: ${marcas}">
+                        <p><input th:utext="*{marca.razonSocial}" class="dropdown-item" type="checkbox"/></p>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Procesadores
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div th:each="procesador: ${procesadores}">
+                        <p><input th:utext="*{procesador}" class="dropdown-item" type="checkbox"/></p>
+                    </div>
+                </div>
+            </li>
+            </li>
+            <li class="nav-item">
+                Memoria ram
+            </li>
+            <li class="nav-item">
+                Sistema operativo
+            </li>
+            <li class="nav-item">
+                Almacenamiento interno
+            </li>
+        </ul>
+    </div>
+</nav>
 <div class="container">
     <div class="row py-3">
         <div class="card col-sm-3" th:each="producto: ${productos}">
@@ -14,14 +52,16 @@
             </div>
 
             <div class="card-body">
-                <h4 class="card-title" th:utext="*{producto.modelo}"></h4>
-                <p th:text="'('+*{producto.memoriaRam}+'+'+*{producto.almacenamientoInterno}"></p>
+                <h6 class="card-title font-weight-bold"
+                    th:utext="*{producto.marca.razonSocial}+' - '+*{producto.modelo}"></h6>
+                <p th:text="'('+*{producto.memoriaRam}+'+'+*{producto.almacenamientoInterno}+')'"></p>
                 <p class="card-text" th:text="*{producto.precio}+'€'"></p>
-                <a href="#" class="btn btn-primary">Comprar</a>
+                <a href="#" class="btn btn-primary">Añadir al carrito</a>
             </div>
         </div>
     </div>
 </div>
+
 <footer th:replace="plantilla :: footer"></footer>
 </body>
 </html>

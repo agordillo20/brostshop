@@ -54,7 +54,6 @@ public class ProductosController {
                         && producto.getFoto().length() > 0) {
                     uploadFileService.delete(producto.getFoto());
                 }
-
                 String uniqueFilename = null;
                 try {
                     uniqueFilename = uploadFileService.copy(foto);
@@ -69,7 +68,6 @@ public class ProductosController {
             } catch (Exception e) {
                 flash.addFlashAttribute("error", "El producto no ha sido creado.");
             }
-
             destino = "redirect:/admin/productos/add";
         }
         return destino;
@@ -84,12 +82,20 @@ public class ProductosController {
     @GetMapping("/list1")
     public String listado1(Model model) {
         model.addAttribute("productos", productosService.findAll());
+        model.addAttribute("marcas", marcasService.findAll());
+        model.addAttribute("procesadores", productosService.findProcesadores());
         return "public/Producto/listAll";
     }
 
     @GetMapping(path = "/remove/{id}")
-    public String remove(@PathVariable Integer id, Model model) {
+    public String remove(@PathVariable Integer id) {
         productosService.delete(id);
         return "redirect:/admin/productos/list";
+    }
+
+    @GetMapping(path = "/filtroMarca{id}")
+    public String filtroMarca(@RequestParam("id") Integer id, Model model) {
+        model.addAttribute("productos", productosService.findProductosByMarca(id));
+        return "administration/Producto/filtroMarca";
     }
 }

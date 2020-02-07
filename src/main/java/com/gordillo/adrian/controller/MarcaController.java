@@ -42,8 +42,14 @@ public class MarcaController {
 
     @GetMapping("/list")
     public String listado(Model model) {
-        model.addAttribute("distribuidores", marcasService.findAll());
+        model.addAttribute("marcas", marcasService.findAll());
         return "administration/Marca/listAll";
+    }
+
+    @GetMapping("/list1")
+    public String listado1(Model model) {
+        model.addAttribute("marcas", marcasService.findAll());
+        return "administration/Producto/filtroMarca";
     }
 
     @GetMapping(path = "/remove/{id}")

@@ -9,6 +9,14 @@ public interface ProductosService {
 
     List<Producto> findAll();
 
+    List<String> findProcesadores();
+
+    List<String> findRam();
+
+    List<String> findMemoria();
+
+    List<String> findSO();
+
     void save(Producto producto) throws Exception;
 
     Producto findOne(Integer id);
@@ -18,6 +26,8 @@ public interface ProductosService {
     List<Producto> findByCodProducto(String codPro);
 
     List<Producto> findProductoByCodArticulo(String codProducto);
+
+    List<Producto> findProductosByMarca(Integer id);
 
 
 }

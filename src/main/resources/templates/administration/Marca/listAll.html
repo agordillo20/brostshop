@@ -7,24 +7,19 @@
     <thead class="bg-info font-weight-bold">
     <tr>
         <td>Nombre</td>
-        <td>Apellidos</td>
-        <td>Localidad</td>
-        <td>Antiguedad</td>
         <td>Activo</td>
         <td>Opciones</td>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="distribuidor: ${distribuidores}">
-        <td th:utext="${distribuidor.nombre}"></td>
-        <td th:utext="${distribuidor.apellidos}"></td>
-        <td th:utext="${distribuidor.localidad}"></td>
-        <td th:utext="${distribuidor.antiguedad}"></td>
-        <td th:utext="${distribuidor.activo}"></td>
+    <tr th:each="marca: ${marcas}">
+        <td th:utext="${marca.razonSocial}"></td>
+        <td th:utext="${marca.activo}"></td>
         <td>
             <a class="btn btn-secondary" th:text="'borrar'"
-               th:href="@{/admin/distribuidor/remove/} + ${distribuidor.id}"
-               onclick="return confirm('¿Está seguro que quiere borrar el distribuidor y sus productos?');"></a>
+               th:href="@{/admin/marca/remove/} + ${marca.id}"
+               onclick="return confirm('¿Está seguro que quiere borrar el distribuidor y sus productos?');">
+            </a>
         </td>
     </tr>
     </tbody>

@@ -23,6 +23,26 @@ public class ProductosServiceImpl implements ProductosService {
     }
 
     @Override
+    public List<String> findProcesadores() {
+        return productoRepository.findProcesadores();
+    }
+
+    @Override
+    public List<String> findRam() {
+        return null;
+    }
+
+    @Override
+    public List<String> findMemoria() {
+        return null;
+    }
+
+    @Override
+    public List<String> findSO() {
+        return null;
+    }
+
+    @Override
     @Transactional
     public void save(Producto producto) throws Exception {
         productoRepository.save(producto);
@@ -48,5 +68,10 @@ public class ProductosServiceImpl implements ProductosService {
     @Override
     public List<Producto> findProductoByCodArticulo(String codProducto) {
         return productoRepository.findArticuloByFiltroCodArticulo(codProducto);
+    }
+
+    @Override
+    public List<Producto> findProductosByMarca(Integer id) {
+        return productoRepository.findProductosByMarca(id);
     }
 }
