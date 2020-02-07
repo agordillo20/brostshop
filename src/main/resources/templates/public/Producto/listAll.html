@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="plantilla :: head"/>
+<header th:replace="plantilla :: header"></header>
+<body style="background-color:rgba(27,27,113,0.28)">
+<div class="container">
+    <div class="row py-3">
+        <div class="card col-sm-3" th:each="producto: ${productos}">
+            <div class="text-center">
+                <img th:if="${not #strings.isEmpty(producto.foto) and #strings.length(producto.foto) > 0}"
+                     class="img-fluid"
+                     style="height:200px;width: 200px" th:src="@{'/upload/' + ${producto.foto}}"
+                     th:alt="foto"/>
+            </div>
+
+            <div class="card-body">
+                <h4 class="card-title" th:utext="*{producto.modelo}"></h4>
+                <p th:text="'('+*{producto.memoriaRam}+'+'+*{producto.almacenamientoInterno}"></p>
+                <p class="card-text" th:text="*{producto.precio}+'€'"></p>
+                <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="plantilla :: footer"></footer>
+</body>
+</html>

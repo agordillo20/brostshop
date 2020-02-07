@@ -81,6 +81,12 @@ public class ProductosController {
         return "administration/Producto/listAll";
     }
 
+    @GetMapping("/list1")
+    public String listado1(Model model) {
+        model.addAttribute("productos", productosService.findAll());
+        return "public/Producto/listAll";
+    }
+
     @GetMapping(path = "/remove/{id}")
     public String remove(@PathVariable Integer id, Model model) {
         productosService.delete(id);

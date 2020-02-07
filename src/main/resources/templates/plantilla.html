@@ -31,9 +31,11 @@
                         Productos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#" th:href="@{/admin/productos/add}">Nuevo producto</a>
-                        <a class="dropdown-item" href="#" th:href="@{/admin/productos/list}">Listado</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" href="#"
+                           th:href="@{/admin/productos/add}">Nuevo producto</a>
+                        <a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" href="#"
+                           th:href="@{/admin/productos/list}">Listado</a>
+                        <a class="dropdown-item" href="#" th:href="@{/admin/productos/list1}">Todos los productos</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
@@ -48,7 +50,7 @@
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Marcas
@@ -69,9 +71,6 @@
                 <li class="small" sec:authorize="isAuthenticated()">
                     <form id="formLogout" th:action="@{/logout}" method="post">
                         <span sec:authentication="name"></span>
-                        [
-                        <span sec:authentication="principal.authorities"></span>
-                        ]
                         <button class="btn btn-outline-primary" type="submit">
                             Cerrar Sesion
                         </button>
