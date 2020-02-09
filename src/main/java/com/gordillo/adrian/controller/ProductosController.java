@@ -84,6 +84,9 @@ public class ProductosController {
         model.addAttribute("productos", productosService.findAll());
         model.addAttribute("marcas", marcasService.findAll());
         model.addAttribute("procesadores", productosService.findProcesadores());
+        model.addAttribute("ram", productosService.findRam());
+        model.addAttribute("almacenamiento", productosService.findMemoria());
+        model.addAttribute("So", productosService.findSO());
         return "public/Producto/listAll";
     }
 
@@ -91,11 +94,5 @@ public class ProductosController {
     public String remove(@PathVariable Integer id) {
         productosService.delete(id);
         return "redirect:/admin/productos/list";
-    }
-
-    @GetMapping(path = "/filtroMarca{id}")
-    public String filtroMarca(@RequestParam("id") Integer id, Model model) {
-        model.addAttribute("productos", productosService.findProductosByMarca(id));
-        return "administration/Producto/filtroMarca";
     }
 }

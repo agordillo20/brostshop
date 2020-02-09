@@ -2,6 +2,7 @@ package com.gordillo.adrian.controller;
 
 import com.gordillo.adrian.model.entity.Marca;
 import com.gordillo.adrian.service.MarcasService;
+import com.gordillo.adrian.service.ProductosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,8 @@ import javax.validation.Valid;
 public class MarcaController {
     @Autowired
     private MarcasService marcasService;
+    @Autowired
+    private ProductosService productosService;
 
     @GetMapping(path = "/")
     @ResponseBody
@@ -46,12 +49,13 @@ public class MarcaController {
         return "administration/Marca/listAll";
     }
 
-    @GetMapping("/list1")
-    public String listado1(Model model) {
-        model.addAttribute("marcas", marcasService.findAll());
-        return "administration/Producto/filtroMarca";
+    /*
+    @PostMapping("/filtro")
+    public ResponseEntity<List<String> getFiltroCodigo(@RequestBody Articulo articulo) {
+        List<String> listaCodigos = articulosService.findByFiltroCodArticulo(articulo.getCodArticulo());
+        return ResponseEntity.ok(listaCodigos);
     }
-
+*/
     @GetMapping(path = "/remove/{id}")
     public String remove(@PathVariable Integer id, Model model) {
         marcasService.delete(id);

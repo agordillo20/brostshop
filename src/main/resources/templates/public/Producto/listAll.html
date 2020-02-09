@@ -13,7 +13,8 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <div th:each="marca: ${marcas}">
-                        <p><input th:utext="*{marca.razonSocial}" class="dropdown-item" type="checkbox"/></p>
+                        <p><input th:value="*{marca.razonSocial}" th:utext="*{marca.razonSocial}"
+                                  class="dropdown-item marca" type="checkbox"/></p>
                     </div>
                 </div>
             </li>
@@ -24,19 +25,47 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <div th:each="procesador: ${procesadores}">
-                        <p><input th:utext="*{procesador}" class="dropdown-item" type="checkbox"/></p>
+                        <p><input th:value="*{procesador}" th:utext="*{procesador}" class="dropdown-item pro"
+                                  type="checkbox"/></p>
                     </div>
                 </div>
             </li>
             </li>
             <li class="nav-item">
-                Memoria ram
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Memoria ram
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div th:each="r: ${ram}">
+                        <p><input th:value="*{r}" th:utext="*{r}" class="dropdown-item ram" type="checkbox"/></p>
+                    </div>
+                </div>
             </li>
             <li class="nav-item">
-                Sistema operativo
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sistema operativo
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div th:each="s: ${So}">
+                        <p><input th:value="*{s}" th:utext="*{s}" class="dropdown-item so" type="checkbox"/></p>
+                    </div>
+                </div>
             </li>
             <li class="nav-item">
-                Almacenamiento interno
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Almacenamiento interno
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div th:each="a: ${almacenamiento}">
+                        <p><input th:value="*{a}" th:utext="*{a}" class="dropdown-item ali" type="checkbox"/></p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <button class="btn btn-primary" onclick="filtar()">Filtrar</button>
             </li>
         </ul>
     </div>
@@ -56,7 +85,7 @@
                     th:utext="*{producto.marca.razonSocial}+' - '+*{producto.modelo}"></h6>
                 <p th:text="'('+*{producto.memoriaRam}+'+'+*{producto.almacenamientoInterno}+')'"></p>
                 <p class="card-text" th:text="*{producto.precio}+'€'"></p>
-                <a href="#" class="btn btn-primary">Añadir al carrito</a>
+                <a class="btn btn-primary">Añadir al carrito</a>
             </div>
         </div>
     </div>
@@ -64,4 +93,68 @@
 
 <footer th:replace="plantilla :: footer"></footer>
 </body>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    // $(this).val() obtiene el valor del objeto
+    var marca = [];
+    var procesadores = [];
+    var ram = [];
+    var So = [];
+    var ali = [];
+    $(".marca").on('change', function () {
+        if ($(this).is(':checked')) {
+            marca.push($(this).val());
+        } else {
+            marca.splice(marca.indexOf($(this).val()), 1);
+        }
+    });
+    $(".pro").on('change', function () {
+        if ($(this).is(':checked')) {
+            procesadores.push($(this).val());
+        } else {
+            procesadores.splice(procesadores.indexOf($(this).val()), 1);
+        }
+    });
+    $(".ram").on('change', function () {
+        if ($(this).is(':checked')) {
+            ram.push($(this).val());
+        } else {
+            ram.splice(ram.indexOf($(this).val()), 1);
+        }
+    });
+    $(".so").on('change', function () {
+        if ($(this).is(':checked')) {
+            So.push($(this).val());
+        } else {
+            So.splice(So.indexOf($(this).val()), 1);
+        }
+    });
+    $(".ali").on('change', function () {
+        if ($(this).is(':checked')) {
+            ali.push($(this).val());
+        } else {
+            ali.splice(ali.indexOf($(this).val()), 1);
+        }
+    });
+
+    function filtar() {
+        if (marca.length != 0) {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: '',
+                data: JSON.stringify(marca),
+                dataType: 'json',
+                cache: false,
+                timeout: 600000,
+                success: function () {
+                    alert("se ha cargado");
+                }
+            });
+        }
+
+    }
+
+    /*]]>*/
+</script>
 </html>

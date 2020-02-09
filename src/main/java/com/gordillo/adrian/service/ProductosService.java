@@ -27,7 +27,7 @@ public interface ProductosService {
 
     List<Producto> findProductoByCodArticulo(String codProducto);
 
-    List<Producto> findProductosByMarca(Integer id);
+    List<Producto> findProductosByMarca(String RazonSocial);
 
 
 }

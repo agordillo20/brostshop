@@ -29,17 +29,17 @@ public class ProductosServiceImpl implements ProductosService {
 
     @Override
     public List<String> findRam() {
-        return null;
+        return productoRepository.findRam();
     }
 
     @Override
     public List<String> findMemoria() {
-        return null;
+        return productoRepository.findMemoria();
     }
 
     @Override
     public List<String> findSO() {
-        return null;
+        return productoRepository.findSO();
     }
 
     @Override
@@ -71,7 +71,7 @@ public class ProductosServiceImpl implements ProductosService {
     }
 
     @Override
-    public List<Producto> findProductosByMarca(Integer id) {
-        return productoRepository.findProductosByMarca(id);
+    public List<Producto> findProductosByMarca(String razonSocial) {
+        return productoRepository.findProductosByMarca(razonSocial);
     }
 }
