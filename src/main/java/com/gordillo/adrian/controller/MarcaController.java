@@ -58,7 +58,7 @@ public class MarcaController {
     public ResponseEntity<List<Producto>> getFiltro(@RequestBody String marca[]) {
         List<Producto> productos = new ArrayList<>();
         for (String mar : marca) {
-            productos.addAll(productosService.findProductosByMarca(mar));
+            productos.addAll(marcasService.findAllByRazonSocial(mar));
         }
         return ResponseEntity.ok(productos);
     }

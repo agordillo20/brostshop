@@ -1,5 +1,7 @@
 package com.gordillo.adrian.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -21,9 +23,11 @@ public class Producto implements Serializable {
     private boolean activo;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "idDistribuidor")
+    @JsonIgnore
     private Distribuidor distribuidor;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idMarca")
+    @JsonIgnore
     private Marca marca;
 
     public Producto() {

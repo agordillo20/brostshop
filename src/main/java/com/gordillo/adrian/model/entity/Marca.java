@@ -1,5 +1,7 @@
 package com.gordillo.adrian.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -12,6 +14,7 @@ public class Marca implements Serializable {
     private int id;
     private String razonSocial;
     @OneToMany(mappedBy = "marca")
+    @JsonIgnore
     private List<Producto> productos;
     private boolean activo;
 

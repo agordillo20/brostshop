@@ -27,7 +27,13 @@ public interface ProductosService {
 
     List<Producto> findProductoByCodArticulo(String codProducto);
 
-    List<Producto> findProductosByMarca(String RazonSocial);
+    List<Producto> filtroRam(int ram);
+
+    List<Producto> filtroSo(String so);
+
+    List<Producto> filtroAli(int ali);
+
+    List<Producto> filtroProcesador(String procesador);
 
 
 }

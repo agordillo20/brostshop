@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/upload/**"). // con esto indicamos el directorio virtual
+        registry.addResourceHandler("/upload/**").// con esto indicamos el directorio virtual
                 addResourceLocations("file:c:/upload/"); // con esto indicamos el directorio real
     }
 }

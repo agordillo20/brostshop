@@ -71,7 +71,22 @@ public class ProductosServiceImpl implements ProductosService {
     }
 
     @Override
-    public List<Producto> findProductosByMarca(String razonSocial) {
-        return productoRepository.findProductosByMarca(razonSocial);
+    public List<Producto> filtroRam(int ram) {
+        return productoRepository.filtroRam(ram);
+    }
+
+    @Override
+    public List<Producto> filtroSo(String so) {
+        return productoRepository.filtroSo(so);
+    }
+
+    @Override
+    public List<Producto> filtroAli(int ali) {
+        return productoRepository.filtroAli(ali);
+    }
+
+    @Override
+    public List<Producto> filtroProcesador(String procesador) {
+        return productoRepository.filtroProcesador(procesador);
     }
 }

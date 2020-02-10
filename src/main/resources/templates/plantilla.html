@@ -8,6 +8,8 @@
     <link rel="stylesheet" th:href="@{/css/foot.css}"/>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}"/>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Spring Boot</title>
 </head>
 <body style="background-color:rgba(27,27,113,0.28)">
@@ -62,7 +64,7 @@
                     </div>
                 </li>
             </ul>
-            <ul class="navbar-nav navbar-right">
+            <ul class="navbar-nav navbar-right" style="margin-right: 90px;">
                 <li sec:authorize="!isAuthenticated()">
                     <a class="btn btn-outline-primary" th:href="@{/login}">Iniciar Sesion
                         <span class="sr-only">Entrar</span>
@@ -70,11 +72,18 @@
                 </li>
                 <li class="small" sec:authorize="isAuthenticated()">
                     <form id="formLogout" th:action="@{/logout}" method="post">
+                <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span sec:authentication="name"></span>
-                        <button class="btn btn-outline-primary" type="submit">
-                            Cerrar Sesion
-                        </button>
-                    </form>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Ver perfil</a>
+                        <a class="dropdown-item" href="#">Carrito</a>
+                        <button class="dropdown-item btn btn-outline-primary" type="submit">Cerrar Sesión</button>
+                    </div>
+                </li>
+                </form>
                 </li>
             </ul>
         </div>

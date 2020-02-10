@@ -6,6 +6,7 @@ import com.gordillo.adrian.service.MarcasService;
 import com.gordillo.adrian.service.ProductosService;
 import com.gordillo.adrian.service.UploadFileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping(path = "/admin/productos")
@@ -94,5 +97,41 @@ public class ProductosController {
     public String remove(@PathVariable Integer id) {
         productosService.delete(id);
         return "redirect:/admin/productos/list";
+    }
+
+    @PostMapping("/filtroRam")
+    public ResponseEntity<List<Producto>> getFiltro(@RequestBody String ram[]) {
+        List<Producto> productos = new ArrayList<>();
+        for (String mar : ram) {
+            productos.addAll(productosService.filtroRam(Integer.parseInt(mar)));
+        }
+        return ResponseEntity.ok(productos);
+    }
+
+    @PostMapping("/filtroProcesador")
+    public ResponseEntity<List<Producto>> getFiltro1(@RequestBody String procesador[]) {
+        List<Producto> productos = new ArrayList<>();
+        for (String mar : procesador) {
+            productos.addAll(productosService.filtroProcesador(mar));
+        }
+        return ResponseEntity.ok(productos);
+    }
+
+    @PostMapping("/filtroSo")
+    public ResponseEntity<List<Producto>> getFiltro2(@RequestBody String so[]) {
+        List<Producto> productos = new ArrayList<>();
+        for (String mar : so) {
+            productos.addAll(productosService.filtroSo(mar));
+        }
+        return ResponseEntity.ok(productos);
+    }
+
+    @PostMapping("/filtroAli")
+    public ResponseEntity<List<Producto>> getFiltro3(@RequestBody String ali[]) {
+        List<Producto> productos = new ArrayList<>();
+        for (String mar : ali) {
+            productos.addAll(productosService.filtroAli(Integer.parseInt(mar)));
+        }
+        return ResponseEntity.ok(productos);
     }
 }

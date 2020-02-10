@@ -1,5 +1,6 @@
 package com.gordillo.adrian.controller;
 
+import com.gordillo.adrian.model.entity.Usuario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,5 +26,11 @@ public class HomeController {
             model.addAttribute("error", "Identificación incorrecta");
         }
         return "login";
+    }
+
+    @GetMapping("registrarse")
+    public String registrar(Model model) {
+        model.addAttribute("usuario", new Usuario());
+        return "/public/Users/Registro";
     }
 }

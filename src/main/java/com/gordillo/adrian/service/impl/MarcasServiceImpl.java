@@ -1,6 +1,7 @@
 package com.gordillo.adrian.service.impl;
 
 import com.gordillo.adrian.model.entity.Marca;
+import com.gordillo.adrian.model.entity.Producto;
 import com.gordillo.adrian.model.repository.MarcasRepository;
 import com.gordillo.adrian.service.MarcasService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,10 @@ public class MarcasServiceImpl implements MarcasService {
     @Transactional
     public void delete(Integer id) {
         marcasRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Producto> findAllByRazonSocial(String razonSocial) {
+        return marcasRepository.findAllByRazonSocial(razonSocial);
     }
 }
