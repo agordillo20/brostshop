@@ -31,7 +31,4 @@ public interface ProductosRepository extends CrudRepository<Producto, Integer> {
 
     @Query("select distinct a.sistemaOperativo from Producto a")
     List<String> findSO();
-
-    //@Query()
-    //List<Producto> findAllByAll();
 }

@@ -72,7 +72,7 @@
 </nav>
 <div class="container">
     <div class="row py-3">
-        <div class="card col-sm-3" th:each="producto: ${productos}">
+        <div class="card col-sm-3" th:each="producto: ${productos}" id="prod">
             <div class="text-center">
                 <img th:if="${not #strings.isEmpty(producto.foto) and #strings.length(producto.foto) > 0}"
                      class="img-fluid"
@@ -142,13 +142,11 @@
             $.ajax({
                 type: "POST",
                 contentType: "application/json",
-                url: '',
+                url: '/admin/marca/filtro',
                 data: JSON.stringify(marca),
                 dataType: 'json',
-                cache: false,
-                timeout: 600000,
-                success: function () {
-                    alert("se ha cargado");
+                success: function (data) {
+                    alert(data.toString());
                 }
             });
         }
