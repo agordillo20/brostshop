@@ -85,13 +85,13 @@
                          style="height:200px;width: 200px" th:src="@{'/upload/' + ${producto.foto}}"
                          th:alt="foto"/>
                 </div>
-
                 <div class="card-body">
+                    <input id="ss" type="hidden" th:value="*{producto.id}">
                     <h6 class="card-title font-weight-bold"
                         th:utext="*{producto.marca.razonSocial}+' - '+*{producto.modelo}"></h6>
                     <p th:text="'('+*{producto.memoriaRam}+'+'+*{producto.almacenamientoInterno}+')'"></p>
                     <p class="card-text" th:text="*{producto.precio}+'€'"></p>
-                    <a class="btn btn-primary">Añadir al carrito</a>
+                    <a class="btn btn-primary" onclick="add()">Añadir al carrito</a>
                 </div>
             </div>
         </div>
@@ -156,6 +156,34 @@
             xhr.setRequestHeader(header, token);
         });
     });
+
+    function add() {
+        var localStorage = window.localStorage;
+        var carrito;
+        if (localStorage.getItem("carrito") == null) {
+            carrito = [];
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+        } else {
+            carrito = JSON.parse(localStorage.getItem("carrito"));
+        }
+        var id = document.getElementById("ss");
+        console.log($('#ss').val());
+        // $.ajax({
+        //     type: "POST",
+        //     contentType: "application/json",
+        //     data:,
+        //     url: '/admin/productos/addCarrito',
+        //     dataType: 'json',
+        //     cache: false,
+        //     timeout: 600000,
+        //     success: function (data) {
+        //         if (data != undefined) {
+        //             carrito.push(data);
+        //             localStorage.
+        //         }
+        //     }
+        // });
+    }
 
     function filtar(campo) {
         var url;

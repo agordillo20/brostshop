@@ -134,4 +134,10 @@ public class ProductosController {
         }
         return ResponseEntity.ok(productos);
     }
+
+    @PostMapping("/addCarrito")
+    public ResponseEntity<Producto> addCarro(@RequestBody int id) {
+        Producto producto = productosService.findOne(id);
+        return ResponseEntity.ok(producto);
+    }
 }
