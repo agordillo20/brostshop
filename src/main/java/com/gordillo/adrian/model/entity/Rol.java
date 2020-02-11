@@ -9,7 +9,7 @@ public class Rol implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(unique = true, length = 60)
+    @Column(length = 60)
     private String rol;
 
     public Rol() {

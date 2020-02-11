@@ -65,6 +65,10 @@
                 </li>
             </ul>
             <ul class="navbar-nav navbar-right" style="margin-right: 90px;">
+                <li sec:authorize="hasRole('ROLE_USER')">
+                    <a th:href="@{/carrito}"><img th:src="@{/images/carrito.png}" th:width="30px"
+                                                  th:height="30px"/></a>
+                </li>
                 <li sec:authorize="!isAuthenticated()">
                     <a class="btn btn-outline-primary" th:href="@{/login}">Iniciar Sesion
                         <span class="sr-only">Entrar</span>
@@ -72,17 +76,17 @@
                 </li>
                 <li class="small" sec:authorize="isAuthenticated()">
                     <form id="formLogout" th:action="@{/logout}" method="post">
-                <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
+                <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_USER')">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span sec:authentication="name"></span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Ver perfil</a>
-                        <a class="dropdown-item" th:href="@{/carrito}">Carrito</a>
                         <button class="dropdown-item btn btn-outline-primary" type="submit">Cerrar Sesión</button>
                     </div>
                 </li>
+
                 </form>
                 </li>
             </ul>
