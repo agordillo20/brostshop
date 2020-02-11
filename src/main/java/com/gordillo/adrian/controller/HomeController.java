@@ -2,6 +2,7 @@ package com.gordillo.adrian.controller;
 
 import com.gordillo.adrian.model.entity.Rol;
 import com.gordillo.adrian.model.entity.Usuario;
+import com.gordillo.adrian.service.ProductosService;
 import com.gordillo.adrian.service.UploadFileService;
 import com.gordillo.adrian.service.UsuariosService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ public class HomeController {
     @Autowired
     private UsuariosService usuariosService;
     @Autowired
+    private ProductosService productosService;
+    @Autowired
     PasswordEncoder encoder;
 
     @GetMapping("login")
@@ -45,6 +48,12 @@ public class HomeController {
             model.addAttribute("error", "Identificación incorrecta");
         }
         return "login";
+    }
+
+    @GetMapping
+    public String home(Model model) {
+        model.addAttribute("productos", productosService.best());
+        return "index";
     }
 
     @GetMapping("registrarse")

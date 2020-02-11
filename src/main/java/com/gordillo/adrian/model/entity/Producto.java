@@ -20,6 +20,7 @@ public class Producto implements Serializable {
     private String sistemaOperativo;
     private int almacenamientoInterno;
     private String foto;
+    private int valoracion;
     private boolean activo;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "idDistribuidor")
@@ -31,6 +32,14 @@ public class Producto implements Serializable {
     private Marca marca;
 
     public Producto() {
+    }
+
+    public int getValoracion() {
+        return valoracion;
+    }
+
+    public void setValoracion(int valoracion) {
+        this.valoracion = valoracion;
     }
 
     public Integer getId() {

@@ -26,9 +26,6 @@ public class UsuariosServiceImpl implements UsuariosService {
     @Transactional(readOnly = false)
     public void save(Usuario usuario) throws Exception {
         usuariosRepository.save(usuario);
-
-//		System.out.println(usuariosRepository.findByEmail("javier@iescastelar.com").toString());
-//		System.out.println(usuariosRepository.findByNif("123").toString());
     }
 
     @Override
@@ -45,7 +42,7 @@ public class UsuariosServiceImpl implements UsuariosService {
     }
 
     @Override
-    public Usuario findByNif(String nif) {
-        return null;
+    public Usuario findByUsername(String username) {
+        return usuariosRepository.findByUsername(username);
     }
 }

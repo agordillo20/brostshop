@@ -15,7 +15,7 @@ public interface UsuariosService {
 
     public void delete(Integer id);
 
-    public Usuario findByNif(String nif);
+    public Usuario findByUsername(String username);
 
 
 }

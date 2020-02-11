@@ -66,6 +66,7 @@ public class ProductosController {
                 producto.setFoto(uniqueFilename);
             }
             try {
+                producto.setCodProducto("00" + productosService.lastId());
                 productosService.save(producto);
                 flash.addFlashAttribute("success", "El producto ha sido creado");
             } catch (Exception e) {

@@ -16,6 +16,7 @@
         <td>Almacenamiento interno</td>
         <td>Distribuidor</td>
         <td>Marca</td>
+        <td>Valoración</td>
         <td>Foto</td>
         <td>Activo</td>
         <td>Opciones</td>
@@ -33,6 +34,7 @@
         <td th:utext="${producto.almacenamientoInterno}"></td>
         <td th:utext="${producto.distribuidor.nombre.concat('-').concat(producto.distribuidor.localidad)}"></td>
         <td th:utext="${producto.marca.razonSocial}"></td>
+        <td th:utext="${producto.valoracion}"></td>
         <td>
             <img th:if="${not #strings.isEmpty(producto.foto) and #strings.length(producto.foto) > 0}"
                  class="card-img-top"

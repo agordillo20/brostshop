@@ -35,5 +35,7 @@ public interface ProductosService {
 
     List<Producto> filtroProcesador(String procesador);
 
+    int lastId();
 
+    List<Producto> best();
 }

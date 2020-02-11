@@ -28,12 +28,12 @@
 <footer th:replace="plantilla :: footer"></footer>
 </body>
 <script th:inline="javascript">
-    var localStorage = window.localStorage;
+    var sessionStorage = window.sessionStorage;
     var carrito;
     render();
 
     function render() {
-        carrito = JSON.parse(localStorage.getItem("carrito"));
+        carrito = JSON.parse(sessionStorage.getItem("carrito"));
         var tbody = document.getElementById("tbody");
         tbody.remove();
         var tb = document.createElement("tbody");
@@ -49,11 +49,13 @@
             var td2 = document.createElement("td");
             td2.appendChild(document.createTextNode("1"));
             var td3 = document.createElement("td");
-            var button = document.createElement("button");
-            button.onclick = borrar;
-            button.appendChild(document.createTextNode("borrar"));
-            button.setAttribute("onclick", "borrar(" + td.getAttribute("id") + ")");
-            td3.appendChild(button);
+            var img = document.createElement("img");
+            img.setAttribute("src", "/images/borrar.png");
+            img.onclick = borrar;
+            img.setAttribute("height", "30px");
+            img.setAttribute("width", "30px");
+            img.setAttribute("onclick", "borrar(" + td.getAttribute("id") + ")");
+            td3.appendChild(img);
             tr.append(td, td1, td2, td3);
             tb.appendChild(tr);
         }
@@ -61,8 +63,8 @@
 
     function borrar(id) {
         carrito.splice(carrito.indexOf(id), 1);
-        localStorage.clear();
-        localStorage.setItem("carrito", JSON.stringify(carrito));
+        sessionStorage.clear();
+        sessionStorage.setItem("carrito", JSON.stringify(carrito));
         render();
     }
 </script>

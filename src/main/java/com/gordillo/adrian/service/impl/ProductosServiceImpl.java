@@ -89,4 +89,14 @@ public class ProductosServiceImpl implements ProductosService {
     public List<Producto> filtroProcesador(String procesador) {
         return productoRepository.filtroProcesador(procesador);
     }
+
+    @Override
+    public int lastId() {
+        return productoRepository.lastId();
+    }
+
+    @Override
+    public List<Producto> best() {
+        return productoRepository.best();
+    }
 }

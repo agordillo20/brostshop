@@ -25,9 +25,9 @@
         </thead>
         <tbody>
         <tr>
-            <td class="bg-dark text-white">Código</td>
+            <td class="bg-dark text-white">Valoracion</td>
             <td>
-                <input type="text" th:field="*{codProducto}" class="form-control"
+                <input type="number" min="0" max="5" th:field="*{valoracion}" class="form-control"
                        th:errorclass="'form-control alert-danger'"/>
             </td>
             <td class="bg-dark text-white">Memoria Ram</td>
@@ -107,10 +107,9 @@
     </table>
 
     <small class="form-text text-danger"
-           th:if="${#fields.hasErrors('codProducto')}" th:errors="*{codProducto}"></small>
-
-    <small class="form-text text-danger"
            th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}"></small>
+    <small class="form-text text-danger"
+           th:if="${#fields.hasErrors('valoracion')}" th:errors="*{valoracion}"></small>
 
     <small class="form-text text-danger"
            th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}"></small>

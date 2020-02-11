@@ -40,4 +40,10 @@ public interface ProductosRepository extends CrudRepository<Producto, Integer> {
 
     @Query("select distinct a.sistemaOperativo from Producto a")
     List<String> findSO();
+
+    @Query("SELECT a.id from Producto a where a.id=(SELECT max(id) from Producto)")
+    int lastId();
+
+    @Query("SELECT a from Producto a where a.valoracion>=4")
+    List<Producto> best();
 }
