@@ -8,15 +8,16 @@
 
 <header th:replace="plantilla :: header"></header>
 
-<div class="container" style="margin-top: 18%">
+<div class="container">
     <div class="text-lg-center">
         <h1>CARRITO</h1>
-        <table class="table table-hover text-center">
+        <table class="table table-hover text-center" id="table">
             <thead class="bg-info font-weight-bold">
             <tr>
                 <td>Producto</td>
                 <td>Importe</td>
                 <td>Cantidad</td>
+                <td></td>
             </tr>
             </thead>
             <tbody id="tbody">
@@ -28,7 +29,42 @@
 </body>
 <script th:inline="javascript">
     var localStorage = window.localStorage;
-    var carrito = JSON.parse(localStorage.getItem("carrito"));
+    var carrito;
+    render();
 
+    function render() {
+        debugger;
+        carrito = JSON.parse(localStorage.getItem("carrito"));
+        var tbody = document.getElementById("tbody");
+        tbody.remove();
+        var tb = document.createElement("tbody");
+        tb.setAttribute("id", "tbody");
+        document.getElementById("table").appendChild(tb);
+        for (let i = 0; i < carrito.length; i++) {
+            var tr = document.createElement("tr");
+            var td = document.createElement("td");
+            td.setAttribute("id", carrito[i]['id']);
+            td.appendChild(document.createTextNode(carrito[i]['modelo']));
+            var td1 = document.createElement("td");
+            td1.appendChild(document.createTextNode(carrito[i]['precio']));
+            var td2 = document.createElement("td");
+            td2.appendChild(document.createTextNode("1"));
+            var td3 = document.createElement("td");
+            var button = document.createElement("button");
+            button.onclick = borrar;
+            button.appendChild(document.createTextNode("borrar"));
+            button.setAttribute("onclick", "borrar(" + td.getAttribute("id") + ")");
+            td3.appendChild(button);
+            tr.append(td, td1, td2, td3);
+            tb.appendChild(tr);
+        }
+    }
+
+    function borrar(id) {
+        carrito.splice(carrito.indexOf(id), 1);
+        localStorage.clear();
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+        render();
+    }
 </script>
 </html>

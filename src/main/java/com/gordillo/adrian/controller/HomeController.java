@@ -33,4 +33,9 @@ public class HomeController {
         model.addAttribute("usuario", new Usuario());
         return "/public/Users/Registro";
     }
+
+    @GetMapping("carrito")
+    public String carrito() {
+        return "/public/Users/Carrito";
+    }
 }
