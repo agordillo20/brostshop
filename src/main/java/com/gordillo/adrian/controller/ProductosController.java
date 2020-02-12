@@ -141,4 +141,10 @@ public class ProductosController {
         Producto producto = productosService.findOne(id);
         return ResponseEntity.ok(producto);
     }
+
+    @GetMapping("/fichaProducto/{id}")
+    public String ficha(@PathVariable int id, Model model) {
+        model.addAttribute("producto", productosService.findOne(id));
+        return "/public/Producto/fichaProducto";
+    }
 }

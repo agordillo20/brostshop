@@ -109,34 +109,5 @@
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <script th:src="@{/js/jquery-ui.min.js}"></script>
 </footer>
-<script th:inline="javascript">
-    $(function () {
-        var token = $("meta[name='_csrf']").attr("content");
-        var header = $("meta[name='_csrf_header']").attr("content");
-        $(document).ajaxSend(function (e, xhr, options) {
-            xhr.setRequestHeader(header, token);
-        });
-    });
-
-    function perfil() {
-
-        // $.ajax({
-        //     type: "POST",
-        //     contentType: "application/json",
-        //     data: JSON.stringify(id),
-        //     url: '/admin/productos/addCarrito',
-        //     dataType: 'json',
-        //     cache: false,
-        //     timeout: 600000,
-        //     success: function (data) {
-        //         if (data != undefined) {
-        //             carrito.push(data);
-        //             sessionStorage.setItem("carrito", JSON.stringify(carrito));
-        //
-        //         }
-        //     }
-        // });
-    }
-</script>
 </body>
 </html>
