@@ -7,20 +7,21 @@
 <body style="background-color:rgba(27,27,113,0.28)">
 
 <header th:replace="plantilla :: header"></header>
-<div class="container" id="raiz">
+<div class="container text-center">
     <h3 class="text-center">PRODUCTOS MEJORES VALORADOS</h3>
     <div id="cont">
         <div class="row py-3">
-            <div class="card col-sm-3" th:each="producto: ${productos}" id="prod" onload="img(${producto.valoracion})">
+            <div class="card col-sm-3" th:each="producto: ${productos}">
                 <div class="text-center">
                     <img th:if="${not #strings.isEmpty(producto.foto) and #strings.length(producto.foto) > 0}"
                          class="img-fluid"
                          style="height:200px;width: 200px" th:src="@{'/upload/' + ${producto.foto}}"
                          th:alt="foto"/>
                 </div>
-                <div class="card-body" id="div">
-                    <div id="div1">
-                    </div>
+                <div class="card-body">
+                    <th:block th:each="i: ${#numbers.sequence(1, producto.getValoracion())}">
+                        <img th:src="@{/images/es.png}" th:width="39px" th:height="40px">
+                    </th:block>
                     <h6 class="card-title font-weight-bold"
                         th:utext="*{producto.marca.razonSocial}+' - '+*{producto.modelo}"></h6>
                     <p th:text="'('+*{producto.memoriaRam}+'+'+*{producto.almacenamientoInterno}+')'"></p>
@@ -31,24 +32,5 @@
     </div>
 </div>
 <footer th:replace="plantilla :: footer"></footer>
-<script th:inline="javascript">
-    function img(valoracion) {
-        var padre = document.getElementById("div");
-        var table = document.createElement("table");
-        var tr = document.createElement("tr");
-        for (let i = 0; i < valoracion; i++) {
-            var td = document.createElement("td");
-            var img = document.createElement("img");
-            img.setAttribute("src", "/images/es.png");
-            img.setAttribute("height", "30px");
-            img.setAttribute("width", "30px");
-            td.appendChild(img);
-            tr.appendChild(td);
-        }
-        table.appendChild(tr);
-        padre.insertBefore(table, document.getElementById("div1"));
-    }
-
-</script>
 </body>
 </html>

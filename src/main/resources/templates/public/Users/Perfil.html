@@ -8,9 +8,40 @@
 
 <header th:replace="plantilla :: header"></header>
 
-<div class="container">
-
+<div class="container text-center">
+    <div class="card bg-dark text-white text-center" style="margin-top: 5%">
+        <div class="card-header">
+            DATOS PERSONALES
+        </div>
+        <div class="card-body">
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label">Nombre de usuario</label>
+                <label class="col-sm-6 col-form-label" th:utext="${user.getUsername()}"/>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label">Nombre</label>
+                <label class="col-sm-6 col-form-label" th:utext="${user.getNombre()}"/>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label">Apellido 1</label>
+                <label class="col-sm-6 col-form-label" th:utext="${user.getApellido1()}"/>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label">Apellido 2</label>
+                <label class="col-sm-6 col-form-label" th:utext="${user.getApellido2()}"/>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label">Dni</label>
+                <label class="col-sm-6 col-form-label" th:utext="${user.getNif()}"/>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-6 col-form-label">Fecha de nacimiento</label>
+                <label class="col-sm-6 col-form-label" th:utext="${user.getFechaNacimiento()}"/>
+            </div>
+        </div>
+    </div>
 </div>
+
 <footer th:replace="plantilla :: footer"></footer>
 </body>
 </html>

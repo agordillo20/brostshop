@@ -6,6 +6,9 @@ import com.gordillo.adrian.service.ProductosService;
 import com.gordillo.adrian.service.UploadFileService;
 import com.gordillo.adrian.service.UsuariosService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -100,5 +103,16 @@ public class HomeController {
     @GetMapping("carrito")
     public String carrito() {
         return "/public/Users/Carrito";
+    }
+
+    @PostMapping("perfil")
+    public String perfil(Model model) {
+        Authentication auth = SecurityContextHolder
+                .getContext()
+                .getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        Usuario usuario = this.usuariosService.findByUsername(userDetail.getUsername());
+        model.addAttribute("user", usuario);
+        return "public/Users/Perfil";
     }
 }
