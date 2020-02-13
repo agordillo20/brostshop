@@ -23,7 +23,7 @@ public interface ProductosService {
 
     void delete(Integer id);
 
-    List<Producto> findByCodProducto(String codPro);
+    Producto findByCodProducto(String codPro);
 
     List<Producto> findProductoByCodArticulo(String codProducto);
 
@@ -38,4 +38,6 @@ public interface ProductosService {
     int lastId();
 
     List<Producto> best();
+
+    Producto findById(int id);
 }

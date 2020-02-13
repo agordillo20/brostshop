@@ -11,8 +11,8 @@ public interface ProductosRepository extends CrudRepository<Producto, Integer> {
     @Query("select a from Producto a where a.distribuidor.id=?1")
     List<Producto> findByDistribuidor(Integer id);
 
-    @Query("select a.codProducto from Producto a where a.codProducto like :CodProducto% order by a.codProducto")
-    List<Producto> findByCodProducto(String CodProducto);
+    @Query("select a from Producto a where a.codProducto =?1")
+    Producto findByCodProducto(String CodProducto);
 
     @Query("select a from Producto a left join fetch a.distribuidor where a.codProducto like :CodProducto%  order by a.codProducto")
     List<Producto> findArticuloByFiltroCodArticulo(String CodProducto);
@@ -46,4 +46,7 @@ public interface ProductosRepository extends CrudRepository<Producto, Integer> {
 
     @Query("SELECT a from Producto a where a.valoracion>=4")
     List<Producto> best();
+
+    Producto findById(int id);
+
 }

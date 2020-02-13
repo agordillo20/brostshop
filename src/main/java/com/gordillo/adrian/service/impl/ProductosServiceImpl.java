@@ -61,7 +61,7 @@ public class ProductosServiceImpl implements ProductosService {
     }
 
     @Override
-    public List<Producto> findByCodProducto(String codPro) {
+    public Producto findByCodProducto(String codPro) {
         return productoRepository.findByCodProducto(codPro);
     }
 
@@ -98,5 +98,10 @@ public class ProductosServiceImpl implements ProductosService {
     @Override
     public List<Producto> best() {
         return productoRepository.best();
+    }
+
+    @Override
+    public Producto findById(int id) {
+        return productoRepository.findById(id);
     }
 }

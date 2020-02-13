@@ -77,6 +77,46 @@ public class ProductosController {
         return destino;
     }
 
+    @GetMapping(path = "/editar/{id}")
+    public String editar(@PathVariable int id, Model model) {
+        model.addAttribute("producto", productosService.findById(id));
+        model.addAttribute("distribuidores", distribuidoresService.findAll());
+        model.addAttribute("marcas", marcasService.findAll());
+        return "administration/Producto/modifProduct";
+    }
+
+    @PostMapping(path = "/editar")
+    public String editar(@Valid Producto producto, BindingResult result, Model model,
+                         @RequestParam("file") MultipartFile foto, RedirectAttributes flash) {
+        String destino;
+        if (result.hasErrors()) {
+            destino = "administration/Producto/modifProduct";
+        } else {
+            if (!foto.isEmpty()) {
+                if (producto.getId() != null && producto.getId() > 0 && producto.getFoto() != null
+                        && producto.getFoto().length() > 0) {
+                    uploadFileService.delete(producto.getFoto());
+                }
+                String uniqueFilename = null;
+                try {
+                    uniqueFilename = uploadFileService.copy(foto);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                producto.setFoto(uniqueFilename);
+            }
+            try {
+                Producto producto1 = productosService.findByCodProducto(producto.getCodProducto());
+                producto.setId(producto1.getId());
+                productosService.save(producto);
+                flash.addFlashAttribute("success", "El producto ha modificado");
+            } catch (Exception e) {
+                flash.addFlashAttribute("error", "El producto no ha modificado.");
+            }
+            destino = "redirect:/";
+        }
+        return destino;
+    }
     @GetMapping("/list")
     public String listado(Model model) {
         model.addAttribute("productos", productosService.findAll());
