@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="plantilla :: head"/>
+<header th:replace="plantilla :: header"></header>
+<body style="background-color:rgba(27,27,113,0.28)">
+<table class="table table-hover text-center">
+    <thead class="bg-info font-weight-bold">
+    <tr>
+        <td>Codigo del pedido</td>
+        <td>Fecha del pedido</td>
+        <td>Detalles en pdf</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pedido: ${pedidos}">
+        <td th:utext="${pedido.codigoPedido}"></td>
+        <td th:utext="${pedido.fechaPedido}"></td>
+        <td>
+            <a th:id="${pedido.id}" class="btn btn-secondary" th:text="'pdf'"
+               onclick="verPdf(this.id)"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="plantilla :: footer"></footer>
+</body>
+<script th:inline="javascript">
+    $(function () {
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        $(document).ajaxSend(function (e, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        });
+    });
+
+    function verPdf(id) {
+        var url = "/admin/rest/factura/report/" + id;
+        $.ajax({
+            type: "GET",
+            contentType: "application/json",
+            url: url,
+            dataType: 'json',
+            cache: false,
+            timeout: 600000,
+        });
+    }
+</script>
+</html>

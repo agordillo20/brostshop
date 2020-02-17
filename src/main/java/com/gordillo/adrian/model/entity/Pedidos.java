@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "pedidos")
@@ -13,8 +12,7 @@ public class Pedidos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private Date fechaPedido;
-    @OneToMany(mappedBy = "productos", fetch = FetchType.LAZY)
-    private List<Producto> productos;
+    private String codigoPedido;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idUser")
     @JsonIgnore
@@ -23,9 +21,9 @@ public class Pedidos {
     public Pedidos() {
     }
 
-    public Pedidos(Date fechaPedido, List<Producto> productos, Usuario usuario) {
+    public Pedidos(String codigoPedido, Date fechaPedido, Usuario usuario) {
+        this.codigoPedido = codigoPedido;
         this.fechaPedido = fechaPedido;
-        this.productos = productos;
         this.usuario = usuario;
     }
 
@@ -37,20 +35,20 @@ public class Pedidos {
         this.id = id;
     }
 
+    public String getCodigoPedido() {
+        return codigoPedido;
+    }
+
+    public void setCodigoPedido(String codigoPedido) {
+        this.codigoPedido = codigoPedido;
+    }
+
     public Date getFechaPedido() {
         return fechaPedido;
     }
 
     public void setFechaPedido(Date fechaPedido) {
         this.fechaPedido = fechaPedido;
-    }
-
-    public List<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
     }
 
     public Usuario getUsuario() {

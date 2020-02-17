@@ -81,7 +81,6 @@
     }
 
     function comprar() {
-        debugger;
         $.ajax({
             type: "POST",
             contentType: "application/json",
@@ -90,8 +89,10 @@
             dataType: 'json',
             cache: false,
             timeout: 600000,
-            success: function (data) {
-                console.log(data);
+            success: function () {
+                sessionStorage.clear();
+                render();
+                alert("pedido realizado correctamente");
             }
         });
     }
