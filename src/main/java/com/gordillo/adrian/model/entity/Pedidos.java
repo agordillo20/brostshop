@@ -13,8 +13,7 @@ public class Pedidos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private Date fechaPedido;
-    @OneToMany(mappedBy = "pedidos")
-    @JsonIgnore
+    @OneToMany(mappedBy = "productos", fetch = FetchType.LAZY)
     private List<Producto> productos;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idUser")
@@ -22,6 +21,12 @@ public class Pedidos {
     private Usuario usuario;
 
     public Pedidos() {
+    }
+
+    public Pedidos(Date fechaPedido, List<Producto> productos, Usuario usuario) {
+        this.fechaPedido = fechaPedido;
+        this.productos = productos;
+        this.usuario = usuario;
     }
 
     public int getId() {

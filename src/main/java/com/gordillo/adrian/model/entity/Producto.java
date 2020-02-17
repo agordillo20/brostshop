@@ -30,7 +30,6 @@ public class Producto implements Serializable {
     @JoinColumn(name = "idMarca")
     @JsonIgnore
     private Marca marca;
-
     public Producto() {
     }
 

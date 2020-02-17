@@ -24,7 +24,7 @@
             </tbody>
         </table>
         <div class="text-center font-weight-bold">
-            <button>Terminar compra</button>
+            <button onclick="comprar()">Terminar compra</button>
         </div>
         <div id="dv"></div>
     </div>
@@ -81,18 +81,17 @@
     }
 
     function comprar() {
+        debugger;
         $.ajax({
             type: "POST",
             contentType: "application/json",
             data: sessionStorage.getItem("carrito"),
-            url: '/admin/productos/comprar',
+            url: '/admin/pedidos/comprar',
             dataType: 'json',
             cache: false,
             timeout: 600000,
             success: function (data) {
-                if (data != undefined) {
-                    document.getElementById("dv").appendChild(document.createTextNode(data.toString()));
-                }
+                console.log(data);
             }
         });
     }
