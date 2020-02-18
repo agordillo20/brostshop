@@ -36,7 +36,7 @@ public class FacturaReportService {
             JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(a);
             // Añade parámetros
             Map<String, Object> parameters = new HashMap<>();
-//			parameters.put("fechaListado", new Date());
+            //parameters.put("fecha",pedidos.getFechaPedido());
             // Completa report desde .jrxml
             JasperPrint jasperPrint = JasperFillManager.fillReport(jrxmlReport, parameters, jrBeanCollectionDataSource);
             JasperExportManager.exportReportToPdfFile(jasperPrint, reportPath + "\\factura.pdf");

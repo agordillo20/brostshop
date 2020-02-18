@@ -11,6 +11,9 @@ public class Factura {
     int idPedido;
     int idProducto;
 
+    public Factura() {
+    }
+
     public Factura(int idPedido, int idProducto) {
         this.idPedido = idPedido;
         this.idProducto = idProducto;
