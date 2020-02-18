@@ -15,7 +15,7 @@ public class Producto implements Serializable {
     private String modelo;
     private double precio;
     private int stock;
-    private int memoriaRam;
+    private int memoria_ram;
     private String procesador;
     private String sistemaOperativo;
     private int almacenamientoInterno;
@@ -81,12 +81,12 @@ public class Producto implements Serializable {
         return stock;
     }
 
-    public int getMemoriaRam() {
-        return memoriaRam;
+    public int getMemoria_ram() {
+        return memoria_ram;
     }
 
-    public void setMemoriaRam(int memoriaRam) {
-        this.memoriaRam = memoriaRam;
+    public void setMemoria_ram(int memoriaRam) {
+        this.memoria_ram = memoriaRam;
     }
 
     public String getProcesador() {

@@ -20,10 +20,10 @@ public interface ProductosRepository extends CrudRepository<Producto, Integer> {
     @Query("select distinct a.procesador from Producto a")
     List<String> findProcesadores();
 
-    @Query("select distinct a.memoriaRam from Producto a")
+    @Query("select distinct a.memoria_ram from Producto a")
     List<String> findRam();
 
-    @Query("select a from Producto a where a.memoriaRam=?1")
+    @Query("select a from Producto a where a.memoria_ram=?1")
     List<Producto> filtroRam(int ram);
 
     @Query("select a from Producto a where a.sistemaOperativo=?1")

@@ -24,7 +24,7 @@
                     </th:block>
                     <h6 class="card-title font-weight-bold"
                         th:text="*{producto.marca.razonSocial}+' - '+*{producto.modelo}"></h6>
-                    <p th:text="'('+*{producto.memoriaRam}+'+'+*{producto.almacenamientoInterno}+')'"></p>
+                    <p th:text="'('+*{producto.memoria_ram}+'+'+*{producto.almacenamientoInterno}+')'"></p>
                     <p class="card-text" th:text="*{producto.precio}+'€'"></p>
                     <a th:href="@{/admin/productos/fichaProducto/} + ${producto.id}">Ver producto</a>
                 </div>

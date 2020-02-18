@@ -1,45 +1,36 @@
 package com.gordillo.adrian.ReportService;
 
-import com.gordillo.adrian.model.entity.Factura;
-import com.gordillo.adrian.model.entity.Pedidos;
-import com.gordillo.adrian.model.entity.Usuario;
+import com.gordillo.adrian.service.ProductosService;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
-public class FacturaReportService {
+public class ProductosReportService {
     @Autowired
-    private ResourceLoader resourceLoader;
+    private ProductosService productosService;
 
-    public byte[] generateReportFromJrxml(List<Factura> factura, Usuario usuario, Pedidos pedidos) {
+    public byte[] generateReportFromJrxml() {
         boolean error = false;
         try {
-            String reportPath = "c:/recursosJasper";
+            String reportPath = "d:/recursosJasper";
             // Carga y compila fichero de resources
-            File fileReport = ResourceUtils.getFile("classpath:facturas.jrxml");
+            File fileReport = ResourceUtils.getFile("classpath:productos.jrxml");
             JasperReport jrxmlReport = JasperCompileManager.compileReport(fileReport.getAbsolutePath());
             // Carga DataSource
-            List<Object> a = new ArrayList<>();
-            a.add(factura);
-            a.add(usuario);
-            a.add(pedidos);
-            JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(a);
+            JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(productosService.findAll());
             // Añade parámetros
             Map<String, Object> parameters = new HashMap<>();
             //parameters.put("fecha",pedidos.getFechaPedido());
             // Completa report desde .jrxml
             JasperPrint jasperPrint = JasperFillManager.fillReport(jrxmlReport, parameters, jrBeanCollectionDataSource);
-            JasperExportManager.exportReportToPdfFile(jasperPrint, reportPath + "\\factura.pdf");
+            JasperExportManager.exportReportToPdfFile(jasperPrint, reportPath + "\\listado.pdf");
             return JasperExportManager.exportReportToPdf(jasperPrint);
         } catch (Exception e) {
             e.printStackTrace();

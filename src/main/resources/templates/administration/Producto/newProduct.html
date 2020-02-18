@@ -32,7 +32,7 @@
             </td>
             <td class="bg-dark text-white">Memoria Ram</td>
             <td>
-                <input type="number" th:field="*{memoriaRam}" class="form-control"
+                <input type="number" th:field="*{memoria_ram}" class="form-control"
                        th:errorclass="'form-control alert-danger'"/>
             </td>
         </tr>
@@ -121,7 +121,7 @@
            th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></small>
 
     <small class="form-text text-danger"
-           th:if="${#fields.hasErrors('memoriaRam')}" th:errors="*{memoriaRam}"></small>
+           th:if="${#fields.hasErrors('memoriaRam')}" th:errors="*{memoria_ram}"></small>
 
     <small class="form-text text-danger"
            th:if="${#fields.hasErrors('procesador')}" th:errors="*{procesador}"></small>

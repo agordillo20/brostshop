@@ -45,7 +45,7 @@
                     <div class="row">
                         <label class="col-sm-3">Especificaciones</label>
                         <label class="col-sm-6"
-                               th:text="'Memoria ram '+${producto.memoriaRam}+'GB, Almacenamiento interno '+${producto.almacenamientoInterno}+'GB, Procesador '+${producto.procesador}"></label>
+                               th:text="'Memoria ram '+${producto.memoria_ram}+'GB, Almacenamiento interno '+${producto.almacenamientoInterno}+'GB, Procesador '+${producto.procesador}"></label>
                     </div>
                 </div>
                 <img th:if="${not #strings.isEmpty(producto.foto) and #strings.length(producto.foto) > 0}"
