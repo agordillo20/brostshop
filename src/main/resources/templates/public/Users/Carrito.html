@@ -9,7 +9,7 @@
 <header th:replace="plantilla :: header"></header>
 
 <div class="container">
-    <div class="text-lg-center">
+    <div id="alert" class="text-lg-center">
         <h1>CARRITO</h1>
         <table class="table table-hover text-center" id="table">
             <thead class="bg-info font-weight-bold">
@@ -43,25 +43,27 @@
         var tb = document.createElement("tbody");
         tb.setAttribute("id", "tbody");
         document.getElementById("table").appendChild(tb);
-        for (let i = 0; i < carrito.length; i++) {
-            var tr = document.createElement("tr");
-            var td = document.createElement("td");
-            td.setAttribute("id", carrito[i]['id']);
-            td.appendChild(document.createTextNode(carrito[i]['modelo']));
-            var td1 = document.createElement("td");
-            td1.appendChild(document.createTextNode(carrito[i]['precio']));
-            var td2 = document.createElement("td");
-            td2.appendChild(document.createTextNode("1"));
-            var td3 = document.createElement("td");
-            var img = document.createElement("img");
-            img.setAttribute("src", "/images/borrar.png");
-            img.onclick = borrar;
-            img.setAttribute("height", "30px");
-            img.setAttribute("width", "30px");
-            img.setAttribute("onclick", "borrar(" + td.getAttribute("id") + ")");
-            td3.appendChild(img);
-            tr.append(td, td1, td2, td3);
-            tb.appendChild(tr);
+        if (carrito != null) {
+            for (let i = 0; i < carrito.length; i++) {
+                var tr = document.createElement("tr");
+                var td = document.createElement("td");
+                td.setAttribute("id", carrito[i]['id']);
+                td.appendChild(document.createTextNode(carrito[i]['modelo']));
+                var td1 = document.createElement("td");
+                td1.appendChild(document.createTextNode(carrito[i]['precio']));
+                var td2 = document.createElement("td");
+                td2.appendChild(document.createTextNode("1"));
+                var td3 = document.createElement("td");
+                var img = document.createElement("img");
+                img.setAttribute("src", "/images/borrar.png");
+                img.onclick = borrar;
+                img.setAttribute("height", "30px");
+                img.setAttribute("width", "30px");
+                img.setAttribute("onclick", "borrar(" + td.getAttribute("id") + ")");
+                td3.appendChild(img);
+                tr.append(td, td1, td2, td3);
+                tb.appendChild(tr);
+            }
         }
     }
 
@@ -92,11 +94,15 @@
             success: function () {
                 sessionStorage.clear();
                 render();
-                alert("pedido realizado correctamente");
-            }, error: function () {
-                sessionStorage.clear();
-                render();
-                alert("pedido realizado correctamente");
+                var p = document.createElement("p");
+                var div = document.createElement("div");
+                div.classList.add("alert", "alert-success");
+                div.setAttribute("role", "alert");
+                div.appendChild(document.createTextNode("Se ha realizado el pedido correctamente"));
+                p.appendChild(div);
+                document.getElementById("alert").appendChild(p);
+            }, error: function (body) {
+                console.log(body);
             }
         });
     }

@@ -8,41 +8,18 @@
     <tr>
         <td>Codigo del pedido</td>
         <td>Fecha del pedido</td>
-        <td>Detalles en pdf</td>
+        <td></td>
     </tr>
     </thead>
     <tbody>
     <tr th:each="pedido: ${pedidos}">
         <td th:utext="${pedido.codigoPedido}"></td>
         <td th:utext="${pedido.fechaPedido}"></td>
-        <td>
-            <a th:id="${pedido.id}" class="btn btn-secondary" th:text="'pdf'"
-               onclick="verPdf(this.id)"></a>
-        </td>
+        <td><a class="btn btn-primary" th:href="@{/admin/pedidos/detalles/}+${pedido.id}" th:target="_blank">Ver
+            detalles</a></td>
     </tr>
     </tbody>
 </table>
 <footer th:replace="plantilla :: footer"></footer>
 </body>
-<script th:inline="javascript">
-    $(function () {
-        var token = $("meta[name='_csrf']").attr("content");
-        var header = $("meta[name='_csrf_header']").attr("content");
-        $(document).ajaxSend(function (e, xhr, options) {
-            xhr.setRequestHeader(header, token);
-        });
-    });
-
-    function verPdf(id) {
-        var url = "/admin/rest/factura/report/" + id;
-        $.ajax({
-            type: "GET",
-            contentType: "application/json",
-            url: url,
-            dataType: 'json',
-            cache: false,
-            timeout: 600000,
-        });
-    }
-</script>
 </html>

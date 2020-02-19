@@ -32,9 +32,9 @@
                         Productos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" href="#"
+                        <a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')"
                            th:href="@{/admin/productos/add}">Nuevo producto</a>
-                        <a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" href="#"
+                        <a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')"
                            th:href="@{/admin/productos/list}">Listado</a>
                         <a class="dropdown-item" href="#" th:href="@{/admin/productos/list1}">Todos los productos</a>
                         <a class="dropdown-item" href="#" sec:authorize="hasRole('ROLE_ADMIN')"
