@@ -21,6 +21,7 @@ public class ProductosReportService {
     public byte[] generateReportFromJrxml(List<Producto> productos, String pdf) {
         boolean error = false;
         try {
+            String reportPath = "c:/recursosJasper";
             // Carga y compila fichero de resources
             File fileReport = ResourceUtils.getFile("classpath:" + pdf);
             JasperReport jrxmlReport = JasperCompileManager.compileReport(fileReport.getAbsolutePath());
@@ -31,7 +32,7 @@ public class ProductosReportService {
             //parameters.put("fecha",pedidos.getFechaPedido());
             // Completa report desde .jrxml
             JasperPrint jasperPrint = JasperFillManager.fillReport(jrxmlReport, parameters, jrBeanCollectionDataSource);
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "/jasperResource/prueba.pdf");
+            JasperExportManager.exportReportToPdfFile(jasperPrint, reportPath + "\\listado.pdf");
             return JasperExportManager.exportReportToPdf(jasperPrint);
         } catch (Exception e) {
             e.printStackTrace();

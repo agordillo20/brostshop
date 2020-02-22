@@ -20,7 +20,7 @@ import java.util.UUID;
 @Service
 public class UploadFileServiceImpl implements UploadFileService {
 	private final Logger log = LoggerFactory.getLogger(getClass());
-	private final static String UPLOADS_FOLDER = "c:/upload";
+	private final static String UPLOADS_FOLDER = "src/main/resources/static/upload";
 
 	@Override
 	public Resource load(String filename) throws MalformedURLException {
