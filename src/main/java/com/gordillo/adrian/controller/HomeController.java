@@ -102,7 +102,7 @@ public class HomeController {
 
     @GetMapping("carrito")
     public String carrito() {
-        return "/public/Users/Carrito";
+        return "public/Users/Carrito";
     }
 
     @PostMapping("perfil")

@@ -56,7 +56,7 @@ public class PedidosController {
     public String listado(Model model) {
         UserDetails userDetail = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("pedidos", pedidosService.getByUsuario(usuariosService.findByUsername(userDetail.getUsername()).getId()));
-        return "/public/Users/listAll";
+        return "public/Users/listAll";
     }
 
     @GetMapping("/detalles/{id}")

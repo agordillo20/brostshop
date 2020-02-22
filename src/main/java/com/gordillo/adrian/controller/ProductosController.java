@@ -185,6 +185,6 @@ public class ProductosController {
     @GetMapping("/fichaProducto/{id}")
     public String ficha(@PathVariable int id, Model model) {
         model.addAttribute("producto", productosService.findOne(id));
-        return "/public/Producto/fichaProducto";
+        return "public/Producto/fichaProducto";
     }
 }
