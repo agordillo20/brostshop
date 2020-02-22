@@ -93,8 +93,7 @@
                         th:utext="*{producto.marca.razonSocial}+' - '+*{producto.modelo}"></h6>
                     <p th:text="'('+*{producto.memoria_ram}+'+'+*{producto.almacenamientoInterno}+')'"></p>
                     <p class="card-text" th:text="*{producto.precio}+'€'"></p>
-                    <a sec:authorize="hasRole('ROLE_USER')"
-                       th:href="@{/admin/productos/fichaProducto/} + ${producto.id}">Ver producto</a>
+                    <a th:href="@{/admin/productos/fichaProducto/} + ${producto.id}">Ver producto</a>
                     <a sec:authorize="hasRole('ROLE_USER')" th:id="*{producto.id}" class="btn btn-primary"
                        onclick="add(this.id)">Añadir al carrito</a>
                 </div>
